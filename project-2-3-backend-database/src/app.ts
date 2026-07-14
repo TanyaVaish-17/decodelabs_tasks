@@ -8,7 +8,19 @@ import { errorHandler } from './middleware/errorHandler';
 export function createApp(): Application {
   const app = express();
 
-  app.use(cors());
+  // Configure CORS with allowed origins
+  const allowedOrigins = [
+    'http://localhost:5500',         
+    'http://127.0.0.1:5500',
+    'https://focal-timer.vercel.app/', 
+  ];
+
+  app.use(
+    cors({
+      origin: allowedOrigins,
+    })
+  );
+
   app.use(express.json());
   app.use(requestLogger);
 
